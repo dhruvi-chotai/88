@@ -1,5 +1,9 @@
 package com.example.demo;
 
+import com.example.demo.PatientRecordController.PatientRecordController;
+import com.example.demo.models.Patient;
+import com.example.demo.models.Patient;
+import com.example.demo.repositories.PatientRecordRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -34,13 +38,13 @@ public class PatientRecordControllerTest {
     @MockBean
     PatientRecordRepository patientRecordRepository;
 
-    PatientRecord RECORD_1 = new PatientRecord(1l, "Rayven Yor", 23, "Cebu Philippines");
-    PatientRecord RECORD_2 = new PatientRecord(2l, "David Landup", 27, "New York USA");
-    PatientRecord RECORD_3 = new PatientRecord(3l, "Jane Doe", 31, "New York USA");
+    Patient RECORD_1 = new Patient(1, "Rayven Yor", 23, "Cebu Philippines");
+    Patient RECORD_2 = new Patient(2, "David Landup", 27, "New York USA");
+    Patient RECORD_3 = new Patient(3, "Jane Doe", 31, "New York USA");
 
     @Test
     public void getAllRecords_success() throws Exception {
-        List<PatientRecord> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
+        List<Patient> records = new ArrayList<>(Arrays.asList(RECORD_1, RECORD_2, RECORD_3));
 
         Mockito.when(patientRecordRepository.findAll()).thenReturn(records);
 
@@ -66,7 +70,7 @@ public class PatientRecordControllerTest {
 
     @Test
     public void createRecord_success() throws Exception {
-        PatientRecord record = PatientRecord.builder()
+        Patient record = Patient.builder()
                 .name("John Doe")
                 .age(47)
                 .address("New York USA")
@@ -87,8 +91,8 @@ public class PatientRecordControllerTest {
 
     @Test
     public void updatePatientRecord_success() throws Exception {
-        PatientRecord updatedRecord = PatientRecord.builder()
-                .patientId(1l)
+        Patient updatedRecord = Patient.builder()
+                .patientId(1)
                 .name("Rayven Zambo")
                 .age(23)
                 .address("Cebu Philippines")
